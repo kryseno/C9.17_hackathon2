@@ -15,13 +15,10 @@ function initializeApp() {
  * when search is utilized, takes user's terms and uses youtube api to pull up related tutorials/recipes
  */
 function add_vids_to_carousel() {
-    console.log('click initiated');
-    console.log(this);
     if ($(this).attr('id') === 'submitDrink') {
         $(".drinksItem").empty();
         var drinkSearchTerm = $('.inputDrink').val() + '';
-        $('.drinksSearchTerm').text("'" + drinkSearchTerm + "'");
-        console.log(drinkSearchTerm);
+        $('.drinksSearchTermSpan').text("'" + drinkSearchTerm + "'");
         var drinkDataObject = {
             q: drinkSearchTerm + ' alcohol drink recipe tutorial',
             maxResults: 5
@@ -32,9 +29,7 @@ function add_vids_to_carousel() {
             url: 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
             data: drinkDataObject,
             success: function (result) {
-                console.log('ajax call success');
                 for (var i = 0; i < result.video.length; i++) {
-                    console.log(result.video[i].id);
                     $("#drinks_carousel").removeClass('hidden');
                     var videosList = $("<iframe>", {
                         width: '90%',
@@ -48,8 +43,7 @@ function add_vids_to_carousel() {
     } else if ($(this).attr('id') === 'submitFood') {
         $(".foodItem").empty();
         var foodSearchTerm = $('#foodInput').val() + '';
-        $('.foodSearchTerm').text("'" + foodSearchTerm + "'");
-        console.log(foodSearchTerm);
+        $('.foodSearchTermSpan').text("'" + foodSearchTerm + "'");
         var foodDataObject = {
             q: foodSearchTerm + ' meals recipe tutorial',
             maxResults: 5
@@ -60,7 +54,6 @@ function add_vids_to_carousel() {
             url: 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
             data: foodDataObject,
             success: function (result) {
-                console.log('ajax call success');
                 for (var i = 0; i < result.video.length; i++) {
                     console.log(result.video[i].id);
                     $("#food_carousel").removeClass('hidden');
